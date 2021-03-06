@@ -1,0 +1,48 @@
+{
+  "name": "tddbc_javascript",
+  "description": "Node.js + Jest for TDDBC Sendai X.",
+  "version": "0.1.0",
+  "author": {
+    "name": "TDDBC and other contributors"
+  },
+  "bugs": {
+    "url": "https://github.com/Chabana1591/TDDBC-javascript/issues"
+  },
+  "homepage": "https://github.com/Chabana1591/TDDBC-javascript",
+  "keywords": [
+    "TDDBC",
+    "jest",
+    "esm"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Chabana1591/TDDBC-javascript.git"
+  },
+  "scripts": {
+    "fmt": "prettier --write *js *.json src/*js",
+    "fmt:check": "prettier --check *js *.json src/*js",
+    "lint": "eslint src/*js",
+    "pretest": "npm run fmt:check && npm run lint",
+    "test": "npm run test:js",
+    "test:js": "jest --config jest_js.config.js",
+    "watch:js": "npm run test:js -- --watch"
+  },
+  "main": "main.js",
+  "devDependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.8",
+    "acorn": "^8.0.5",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.21.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-standard": "^4.1.0",
+    "esm": "^3.2.25",
+    "jest": "^26.6.3",
+    "prettier": "^2.2.1",
+    "rewire": "^5.0.0"
+  }
+}
