@@ -28,7 +28,7 @@
     "test:js": "jest --config jest_js.config.js",
     "watch:js": "npm run test:js -- --watch"
   },
-  "main": "main.js",
+  "main": "src/sample.js",
   "devDependencies": {
     "@babel/core": "^7.13.8",
     "@babel/preset-env": "^7.13.8",
