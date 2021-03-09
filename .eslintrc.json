@@ -9,6 +9,18 @@
     "quotes": "off",
     "semi": "off",
     "space-before-function-paren": "off",
-    "comma-dangle": ["error", "always-multiline"]
-  }
+    "comma-dangle": ["error", {
+      "arrays": "never",
+      "objects": "never",
+      "imports": "never",
+      "exports": "never",
+      "functions": "never"
+    }]
+  },
+  "env": {
+    "jest/globals": true
+  },
+  "plugins": [
+    "jest"
+  ]
 }
