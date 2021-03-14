@@ -11,6 +11,7 @@ const weightToSize = weight => {
   if (weight >= 20) return "L";
   if (weight >= 10) return "M";
   if (weight >= 1) return "S";
+  return "判定不能";
 };
 
 module.exports = {
