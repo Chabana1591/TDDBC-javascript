@@ -7,7 +7,10 @@ const ichigoToString = ichigo => {
 };
 
 const weightToSize = weight => {
-  return "S";
+  if (weight >= 25) return "LL";
+  if (weight >= 20) return "L";
+  if (weight >= 10) return "M";
+  if (weight >= 1) return "S";
 };
 
 module.exports = {
