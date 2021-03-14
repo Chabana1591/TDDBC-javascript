@@ -33,10 +33,24 @@ describe("いちごオブジェクトの文字列表現を取得", () => {
   );
 });
 
-test("数値の1を与えたときに文字列`S`が返ること。", () => {
-  expect(weightToSize(1)).toBe("S");
-});
+describe("重さを与えたときに対応するサイズが返ること", () => {
+  test.each`
+    weight | size
+    ${1}   | ${"S"}
+  `("", () => {});
+  test("数値の1を与えたときに文字列`S`が返ること。", () => {
+    expect(weightToSize(1)).toBe("S");
+  });
 
-test("数値10を与えたときに文字列`M`が返ること", () => {
-  expect(weightToSize(10)).toBe("M");
+  test("数値10を与えたときに文字列`M`が返ること", () => {
+    expect(weightToSize(10)).toBe("M");
+  });
+
+  test("重さとして数値の20を与えたときにサイズとして文字列`L`が返ること", () => {
+    expect(weightToSize(20)).toBe("L");
+  });
+
+  test("重さとして数値の25を与えたときにサイズとして文字列`LL`が返ること", () => {
+    expect(weightToSize(25)).toBe("LL");
+  });
 });
