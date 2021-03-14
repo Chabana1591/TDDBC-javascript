@@ -5,11 +5,12 @@ const createIchigoWithWeight = require("./ichigo").createIchigoWithWeight;
 
 describe("品種とサイズを与えて、いちごオブジェクトを作成できること", () => {
   test.each`
-    variety         | size    | expected
-    ${"あまおう"}   | ${"S"}  | ${{ variety: "あまおう", size: "S" }}
-    ${"とちおとめ"} | ${"M"}  | ${{ variety: "とちおとめ", size: "M" }}
-    ${"もういっこ"} | ${"L"}  | ${{ variety: "もういっこ", size: "L" }}
-    ${"もういっこ"} | ${"LL"} | ${{ variety: "もういっこ", size: "LL" }}
+    variety         | size          | expected
+    ${"あまおう"}   | ${"S"}        | ${{ variety: "あまおう", size: "S" }}
+    ${"とちおとめ"} | ${"M"}        | ${{ variety: "とちおとめ", size: "M" }}
+    ${"もういっこ"} | ${"L"}        | ${{ variety: "もういっこ", size: "L" }}
+    ${"もういっこ"} | ${"LL"}       | ${{ variety: "もういっこ", size: "LL" }}
+    ${"とちおとめ"} | ${"判定不能"} | ${{ variety: "とちおとめ", size: "判定不能" }}
   `(
     "品種として $variety とサイズとして $size を与えたときに $expected が返ること",
     ({ variety, size, expected }) => {
@@ -102,17 +103,17 @@ describe("整数値で重さを与えたときに対応するサイズが返る�
 });
 
 describe("品種と重さを与えたときにいちごオブジェクトを返すこと", () => {
-  test('品種として`あまおう`と重さ`9`を与えたときにいちごオブジェクト{ variety: "あまおう", size: "S" }を返すこと', () => {
-    expect(createIchigoWithWeight("あまおう", 9)).toStrictEqual({
-      variety: "あまおう",
-      size: "S",
-    });
-  });
-
-  test('品種として`とおちおとめ`と重さ`10`を与えたときにいちごオブジェクト{ variety: "とおちおとめ", size: "M" }を返すこと', () => {
-    expect(createIchigoWithWeight("とちおとめ", 10)).toStrictEqual({
-      variety: "とちおとめ",
-      size: "M",
-    });
-  });
+  test.each`
+    variety         | weight | expected
+    ${"あまおう"}   | ${1}   | ${{ variety: "あまおう", size: "S" }}
+    ${"とちおとめ"} | ${10}  | ${{ variety: "とちおとめ", size: "M" }}
+    ${"もういっこ"} | ${20}  | ${{ variety: "もういっこ", size: "L" }}
+    ${"もういっこ"} | ${25}  | ${{ variety: "もういっこ", size: "LL" }}
+    ${"とちおとめ"} | ${0}   | ${{ variety: "とちおとめ", size: "判定不能" }}
+  `(
+    "品種として $variety 重さとして $weight を与えたときに $expected が返ること",
+    ({ variety, weight, expected }) => {
+      expect(createIchigoWithWeight(variety, weight)).toStrictEqual(expected);
+    }
+  );
 });
