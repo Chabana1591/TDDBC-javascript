@@ -34,32 +34,71 @@ describe("いちごオブジェクトの文字列表現を取得", () => {
   );
 });
 
-describe("重さを与えたときに対応するサイズが返ること", () => {
-  test.each`
-    weight | size
-    ${1}   | ${"S"}
-    ${9}   | ${"S"}
-    ${10}  | ${"M"}
-    ${19}  | ${"M"}
-    ${20}  | ${"L"}
-    ${24}  | ${"L"}
-    ${25}  | ${"LL"}
-    ${26}  | ${"LL"}
-  `(
-    "数値の$weightを与えたときに文字列`$size`が返ること。",
-    ({ weight, size }) => {
-      expect(weightToSize(weight)).toBe(size);
-    }
-  );
-  test.each`
-    weight | size
-    ${0}   | ${"判定不能"}
-  `(
-    "【仕様未確定】異常な数値の$weightを与えたときに文字列`$size`が返ること。",
-    ({ weight, size }) => {
-      expect(weightToSize(weight)).toBe(size);
-    }
-  );
+describe("整数値で重さを与えたときに対応するサイズが返ること", () => {
+  describe("重さが1g以上9g以下であったときにサイズとして`S`が返ること", () => {
+    test.each`
+      weight | size
+      ${1}   | ${"S"}
+      ${9}   | ${"S"}
+    `(
+      "数値の$weightを与えたときに文字列`$size`が返ること。",
+      ({ weight, size }) => {
+        expect(weightToSize(weight)).toBe(size);
+      }
+    );
+  });
+
+  describe("重さが10g以上19g以下であったときにサイズとして`M`が返ること", () => {
+    test.each`
+      weight | size
+      ${10}  | ${"M"}
+      ${19}  | ${"M"}
+    `(
+      "数値の$weightを与えたときに文字列`$size`が返ること。",
+      ({ weight, size }) => {
+        expect(weightToSize(weight)).toBe(size);
+      }
+    );
+  });
+
+  describe("重さが20g以上24g以下であったときにサイズとして`L`が返ること", () => {
+    test.each`
+      weight | size
+      ${20}  | ${"L"}
+      ${24}  | ${"L"}
+    `(
+      "数値の$weightを与えたときに文字列`$size`が返ること。",
+      ({ weight, size }) => {
+        expect(weightToSize(weight)).toBe(size);
+      }
+    );
+  });
+
+  describe("重さが25g以上であったときにサイズとして`LL`が返ること", () => {
+    test.each`
+      weight | size
+      ${25}  | ${"LL"}
+      ${26}  | ${"LL"}
+    `(
+      "数値の$weightを与えたときに文字列`$size`が返ること。",
+      ({ weight, size }) => {
+        expect(weightToSize(weight)).toBe(size);
+      }
+    );
+  });
+
+  describe("【仕様未確定】異常な数値を与えたときにサイズとして`判定不能`が返ること", () => {
+    test.each`
+      weight | size
+      ${0}   | ${"判定不能"}
+      ${1.5} | ${"判定不能"}
+    `(
+      "【仕様未確定】異常な数値の$weightを与えたときに文字列`$size`が返ること。",
+      ({ weight, size }) => {
+        expect(weightToSize(weight)).toBe(size);
+      }
+    );
+  });
 });
 
 describe("品種と重さを与えたときにいちごオブジェクトを返すこと", () => {
