@@ -8,10 +8,12 @@ const ichigoToString = ichigo => {
 
 const weightToSize = weight => {
   if (!Number.isInteger(weight)) return "判定不能";
-  if (weight >= 25) return "LL";
-  if (weight >= 20) return "L";
-  if (weight >= 10) return "M";
-  if (weight >= 1) return "S";
+
+  if (25 <= weight) return "LL";
+  if (20 <= weight) return "L";
+  if (10 <= weight) return "M";
+  if (1 <= weight) return "S";
+
   return "判定不能";
 };
 
