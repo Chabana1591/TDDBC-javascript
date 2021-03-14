@@ -2,6 +2,7 @@ const createIchigo = require("./ichigo").createIchigo;
 const ichigoToString = require("./ichigo").ichigoToString;
 const weightToSize = require("./ichigo").weightToSize;
 const createIchigoWithWeight = require("./ichigo").createIchigoWithWeight;
+const Ichigo = require("./ichigo").Ichigo;
 
 describe("品種とサイズを与えて、いちごオブジェクトを作成できること", () => {
   test.each`
@@ -90,9 +91,10 @@ describe("整数値で重さを与えたときに対応するサイズが返る�
 
   describe("【仕様未確定】異常な数値を与えたときにサイズとして`判定不能`が返ること", () => {
     test.each`
-      weight | size
-      ${0}   | ${"判定不能"}
-      ${1.5} | ${"判定不能"}
+      weight    | size
+      ${0}      | ${"判定不能"}
+      ${1.5}    | ${"判定不能"}
+      ${"重さ"} | ${"判定不能"}
     `(
       "【仕様未確定】異常な数値の$weightを与えたときに文字列`$size`が返ること。",
       ({ weight, size }) => {
@@ -116,4 +118,18 @@ describe("品種と重さを与えたときにいちごオブジェクトを返�
       expect(createIchigoWithWeight(variety, weight)).toStrictEqual(expected);
     }
   );
+});
+
+describe("品種とサイズを渡していちごクラスのインスタンスが作成できること", () => {
+  test("品種として`あまおう`とサイズとして`S`を与えたときにいちごクラスのインスタンスが作成できること", () => {
+    const ichigo = new Ichigo("あまおう", "S");
+    expect(ichigo.variety).toBe("あまおう");
+    expect(ichigo.size).toBe("S");
+  });
+
+  test("品種として`あまおう`とサイズとして`S`を与えたときにいちごクラスのインスタンスが作成できること", () => {
+    expect(() => {
+      new Ichigo();
+    }).toThrow();
+  });
 });
