@@ -37,11 +37,24 @@ describe("重さを与えたときに対応するサイズが返ること", () =
   test.each`
     weight | size
     ${1}   | ${"S"}
+    ${9}   | ${"S"}
     ${10}  | ${"M"}
+    ${11}  | ${"M"}
     ${20}  | ${"L"}
+    ${21}  | ${"L"}
     ${25}  | ${"LL"}
+    ${26}  | ${"LL"}
   `(
     "数値の$weightを与えたときに文字列`$size`が返ること。",
+    ({ weight, size }) => {
+      expect(weightToSize(weight)).toBe(size);
+    }
+  );
+  test.each`
+    weight | size
+    ${0}   | ${"判定不能"}
+  `(
+    "異常な数値の$weightを与えたときに文字列`$size`が返ること。",
     ({ weight, size }) => {
       expect(weightToSize(weight)).toBe(size);
     }
