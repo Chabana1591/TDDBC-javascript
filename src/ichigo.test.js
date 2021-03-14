@@ -1,6 +1,7 @@
 const createIchigo = require("./ichigo").createIchigo;
 const ichigoToString = require("./ichigo").ichigoToString;
 const weightToSize = require("./ichigo").weightToSize;
+const createIchigoWithWeight = require("./ichigo").createIchigoWithWeight;
 
 describe("品種とサイズを与えて、いちごオブジェクトを作成できること", () => {
   test.each`

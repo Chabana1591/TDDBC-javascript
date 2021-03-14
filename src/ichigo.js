@@ -14,8 +14,13 @@ const weightToSize = weight => {
   return "判定不能";
 };
 
+const createIchigoWithWeight = (variety, weight) => {
+  return { variety: variety, size: weightToSize(weight) };
+};
+
 module.exports = {
   createIchigo: createIchigo,
   ichigoToString: ichigoToString,
   weightToSize: weightToSize,
+  createIchigoWithWeight: createIchigoWithWeight,
 };
