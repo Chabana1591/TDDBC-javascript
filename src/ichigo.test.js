@@ -54,9 +54,25 @@ describe("重さを与えたときに対応するサイズが返ること", () =
     weight | size
     ${0}   | ${"判定不能"}
   `(
-    "異常な数値の$weightを与えたときに文字列`$size`が返ること。",
+    "【仕様未確定】異常な数値の$weightを与えたときに文字列`$size`が返ること。",
     ({ weight, size }) => {
       expect(weightToSize(weight)).toBe(size);
     }
   );
+});
+
+describe("品種と重さを与えたときにいちごオブジェクトを返すこと", () => {
+  test('品種として`あまおう`と重さ`9`を与えたときにいちごオブジェクト{ variety: "あまおう", size: "S" }を返すこと', () => {
+    expect(createIchigoWithWeight("あまおう", 9)).toStrictEqual({
+      variety: "あまおう",
+      size: "S",
+    });
+  });
+
+  test('品種として`とおちおとめ`と重さ`10`を与えたときにいちごオブジェクト{ variety: "とおちおとめ", size: "M" }を返すこと', () => {
+    expect(createIchigoWithWeight("とちおとめ", 10)).toStrictEqual({
+      variety: "とちおとめ",
+      size: "M",
+    });
+  });
 });
