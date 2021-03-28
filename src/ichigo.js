@@ -1,11 +1,3 @@
-const createIchigo = (variety, size) => {
-  return { variety, size };
-};
-
-const ichigoToString = ichigo => {
-  return `${ichigo.variety}: ${ichigo.size}`;
-};
-
 const weightToSize = weight => {
   if (!Number.isInteger(weight)) return "判定不能";
 
@@ -38,8 +30,6 @@ const Ichigo = class {
 };
 
 module.exports = {
-  createIchigo: createIchigo,
-  ichigoToString: ichigoToString,
   weightToSize: weightToSize,
   createIchigoWithWeight: createIchigoWithWeight,
   Ichigo: Ichigo,
