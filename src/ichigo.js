@@ -14,6 +14,10 @@ const Ichigo = class {
     this.size = size;
   }
 
+  isEqualToVarietyOf(ichigo) {
+    return this.variety === ichigo.variety;
+  }
+
   toString() {
     return `${this.variety}: ${this.size.value}`;
   }

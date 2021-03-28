@@ -45,11 +45,11 @@ describe("いちごインスタンスの文字列表現を取得", () => {
 
 describe("いちごサイズクラスのインスタンスを生成できること", () => {
   test.each`
-    size      | expected
-    ${"S"}    | ${"S"}
-    ${"M"}    | ${"M"}
-    ${"L"}    | ${"L"}
-    ${"LL"}   | ${"LL"}
+    size    | expected
+    ${"S"}  | ${"S"}
+    ${"M"}  | ${"M"}
+    ${"L"}  | ${"L"}
+    ${"LL"} | ${"LL"}
   `(
     "引数としてサイズの文字列 $size を与えて、サイズが $expected のインスタンスを生成できる。",
     ({ size, expected }) => {
@@ -59,15 +59,15 @@ describe("いちごサイズクラスのインスタンスを生成できるこ�
   );
 
   test.each`
-  size      | expected
-  ${"重さ"} | ${"判定不能"}
-`(
-  "引数として異常な文字列 $size を与えて、サイズが $expected のインスタンスを生成できる。",
-  ({ size, expected }) => {
-    const ichigoSize = new IchigoSize(size);
-    expect(ichigoSize.value).toBe(expected);
-  }
-);
+    size      | expected
+    ${"重さ"} | ${"判定不能"}
+  `(
+    "引数として異常な文字列 $size を与えて、サイズが $expected のインスタンスを生成できる。",
+    ({ size, expected }) => {
+      const ichigoSize = new IchigoSize(size);
+      expect(ichigoSize.value).toBe(expected);
+    }
+  );
 });
 
 describe("整数値で重さを与えたときに対応するいちごサイズクラスのインスタンスが返ること", () => {
@@ -136,4 +136,17 @@ describe("整数値で重さを与えたときに対応するいちごサイズ�
       }
     );
   });
+});
+
+describe("いちご同士の品種が同一かどうか判別できること", () => {
+  test.each`
+    ichigoA                                         | ichigoB                                           | expected
+    ${new Ichigo("あまおう", new IchigoSize("S"))}  | ${new Ichigo("あまおう", new IchigoSize("L"))}    | ${true}
+    ${new Ichigo("あまおう", new IchigoSize("LL"))} | ${new Ichigo("とちおとめ", new IchigoSize("LL"))} | ${false}
+  `(
+    "いちごA: $ichigoA 、いちごB: $ichigoB を与えたときに $expected を返す",
+    ({ ichigoA, ichigoB, expected }) => {
+      expect(ichigoA.isEqualToVarietyOf(ichigoB)).toBe(expected);
+    }
+  );
 });
