@@ -23,8 +23,11 @@ const createIchigoWithWeight = (variety, weight) => {
 
 const Ichigo = class {
   constructor(variety, size) {
-    // if (!variety) {
-    // }
+    if (!variety) {
+      throw new Error(
+        `varietyが${variety}です。いちごインスタンスを生成できません。`
+      );
+    }
     this.variety = variety;
     this.size = size;
   }
