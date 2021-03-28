@@ -29,8 +29,15 @@ const Ichigo = class {
   }
 };
 
+const IchigoSize = class {
+  constructor(sizeString) {
+    this.value = sizeString;
+  }
+};
+
 module.exports = {
-  weightToSize: weightToSize,
-  createIchigoWithWeight: createIchigoWithWeight,
-  Ichigo: Ichigo,
+  weightToSize,
+  createIchigoWithWeight,
+  Ichigo,
+  IchigoSize,
 };

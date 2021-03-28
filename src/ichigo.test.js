@@ -1,6 +1,7 @@
 const weightToSize = require("./ichigo").weightToSize;
 const createIchigoWithWeight = require("./ichigo").createIchigoWithWeight;
 const Ichigo = require("./ichigo").Ichigo;
+const IchigoSize = require("./ichigo").IchigoSize;
 
 describe("品種とサイズを与えて、いちごクラスのインスタンスを作成できること", () => {
   test.each`
@@ -126,4 +127,11 @@ describe("品種と重さを与えたときにいちごオブジェクトを返�
       expect(createIchigoWithWeight(variety, weight)).toStrictEqual(expected);
     }
   );
+});
+
+describe("いちごサイズクラスのインスタンスを生成できること", () => {
+  test("引数としてサイズの文字列`S`を与えて、Sサイズのインスタンスが生成できる。", () => {
+    const size = new IchigoSize("S");
+    expect(size.value).toBe("S");
+  });
 });
