@@ -1,23 +1,22 @@
-const weightToSize = require("./ichigo").weightToSize;
 const createIchigoWithWeight = require("./ichigo").createIchigoWithWeight;
 const Ichigo = require("./ichigo").Ichigo;
 const IchigoSize = require("./ichigo").IchigoSize;
 
 describe("品種とサイズを与えて、いちごクラスのインスタンスを作成できること", () => {
   test.each`
-    variety         | size          | expected
-    ${"あまおう"}   | ${"S"}        | ${{ variety: "あまおう", size: "S" }}
-    ${"とちおとめ"} | ${"M"}        | ${{ variety: "とちおとめ", size: "M" }}
-    ${"もういっこ"} | ${"L"}        | ${{ variety: "もういっこ", size: "L" }}
-    ${"もういっこ"} | ${"LL"}       | ${{ variety: "もういっこ", size: "LL" }}
-    ${"とちおとめ"} | ${"判定不能"} | ${{ variety: "とちおとめ", size: "判定不能" }}
+    variety         | size                          | expected
+    ${"あまおう"}   | ${new IchigoSize("S")}        | ${{ variety: "あまおう", size: "S" }}
+    ${"とちおとめ"} | ${new IchigoSize("M")}        | ${{ variety: "とちおとめ", size: "M" }}
+    ${"もういっこ"} | ${new IchigoSize("L")}        | ${{ variety: "もういっこ", size: "L" }}
+    ${"もういっこ"} | ${new IchigoSize("LL")}       | ${{ variety: "もういっこ", size: "LL" }}
+    ${"とちおとめ"} | ${new IchigoSize("判定不能")} | ${{ variety: "とちおとめ", size: "判定不能" }}
   `(
     "品種として $variety とサイズとして $size を与えたときに $expected が返ること",
     ({ variety, size, expected }) => {
       // expect(createIchigo(variety, size)).toStrictEqual(expected);
       const ichigo = new Ichigo(variety, size);
       expect(ichigo.variety).toBe(variety);
-      expect(ichigo.size).toBe(size);
+      expect(ichigo.size).toStrictEqual(size);
     }
   );
 
@@ -31,11 +30,11 @@ describe("品種とサイズを与えて、いちごクラスのインスタン�
 
 describe("いちごインスタンスの文字列表現を取得", () => {
   test.each`
-    variety         | size    | expected
-    ${"あまおう"}   | ${"S"}  | ${"あまおう: S"}
-    ${"とちおとめ"} | ${"M"}  | ${"とちおとめ: M"}
-    ${"もういっこ"} | ${"L"}  | ${"もういっこ: L"}
-    ${"もういっこ"} | ${"LL"} | ${"もういっこ: LL"}
+    variety         | size                    | expected
+    ${"あまおう"}   | ${new IchigoSize("S")}  | ${"あまおう: S"}
+    ${"とちおとめ"} | ${new IchigoSize("M")}  | ${"とちおとめ: M"}
+    ${"もういっこ"} | ${new IchigoSize("L")}  | ${"もういっこ: L"}
+    ${"もういっこ"} | ${new IchigoSize("LL")} | ${"もういっこ: LL"}
   `(
     "`{variety: '$variety', size: '$size'}`のいちごオブジェクトを与えたときに`$expected`が返ること",
     ({ variety, size, expected }) => {
@@ -45,16 +44,16 @@ describe("いちごインスタンスの文字列表現を取得", () => {
   );
 });
 
-describe("整数値で重さを与えたときに対応するサイズが返ること", () => {
+describe("整数値で重さを与えたときに対応するいちごサイズクラスのインスタンスが返ること", () => {
   describe("重さが1g以上9g以下であったときにサイズとして`S`が返ること", () => {
     test.each`
       weight | size
-      ${1}   | ${"S"}
-      ${9}   | ${"S"}
+      ${1}   | ${new IchigoSize("S")}
+      ${9}   | ${new IchigoSize("S")}
     `(
       "数値の$weightを与えたときに文字列`$size`が返ること。",
       ({ weight, size }) => {
-        expect(weightToSize(weight)).toBe(size);
+        expect(new IchigoSize(weight)).toStrictEqual(size);
       }
     );
   });
@@ -62,12 +61,12 @@ describe("整数値で重さを与えたときに対応するサイズが返る�
   describe("重さが10g以上19g以下であったときにサイズとして`M`が返ること", () => {
     test.each`
       weight | size
-      ${10}  | ${"M"}
-      ${19}  | ${"M"}
+      ${10}  | ${new IchigoSize("M")}
+      ${19}  | ${new IchigoSize("M")}
     `(
       "数値の$weightを与えたときに文字列`$size`が返ること。",
       ({ weight, size }) => {
-        expect(weightToSize(weight)).toBe(size);
+        expect(new IchigoSize(weight)).toStrictEqual(size);
       }
     );
   });
@@ -75,12 +74,12 @@ describe("整数値で重さを与えたときに対応するサイズが返る�
   describe("重さが20g以上24g以下であったときにサイズとして`L`が返ること", () => {
     test.each`
       weight | size
-      ${20}  | ${"L"}
-      ${24}  | ${"L"}
+      ${20}  | ${new IchigoSize("L")}
+      ${24}  | ${new IchigoSize("L")}
     `(
       "数値の$weightを与えたときに文字列`$size`が返ること。",
       ({ weight, size }) => {
-        expect(weightToSize(weight)).toBe(size);
+        expect(new IchigoSize(weight)).toStrictEqual(size);
       }
     );
   });
@@ -88,12 +87,12 @@ describe("整数値で重さを与えたときに対応するサイズが返る�
   describe("重さが25g以上であったときにサイズとして`LL`が返ること", () => {
     test.each`
       weight | size
-      ${25}  | ${"LL"}
-      ${26}  | ${"LL"}
+      ${25}  | ${new IchigoSize("LL")}
+      ${26}  | ${new IchigoSize("LL")}
     `(
       "数値の$weightを与えたときに文字列`$size`が返ること。",
       ({ weight, size }) => {
-        expect(weightToSize(weight)).toBe(size);
+        expect(new IchigoSize(weight)).toStrictEqual(size);
       }
     );
   });
@@ -101,13 +100,13 @@ describe("整数値で重さを与えたときに対応するサイズが返る�
   describe("【仕様未確定】異常な数値を与えたときにサイズとして`判定不能`が返ること", () => {
     test.each`
       weight    | size
-      ${0}      | ${"判定不能"}
-      ${1.5}    | ${"判定不能"}
-      ${"重さ"} | ${"判定不能"}
+      ${0}      | ${new IchigoSize("判定不能")}
+      ${1.5}    | ${new IchigoSize("判定不能")}
+      ${"重さ"} | ${new IchigoSize("判定不能")}
     `(
       "【仕様未確定】異常な数値の$weightを与えたときに文字列`$size`が返ること。",
       ({ weight, size }) => {
-        expect(weightToSize(weight)).toBe(size);
+        expect(new IchigoSize(weight)).toStrictEqual(size);
       }
     );
   });
@@ -130,8 +129,18 @@ describe("品種と重さを与えたときにいちごオブジェクトを返�
 });
 
 describe("いちごサイズクラスのインスタンスを生成できること", () => {
-  test("引数としてサイズの文字列`S`を与えて、Sサイズのインスタンスが生成できる。", () => {
-    const size = new IchigoSize("S");
-    expect(size.value).toBe("S");
-  });
+  test.each`
+    size      | expected
+    ${"S"}    | ${"S"}
+    ${"M"}    | ${"M"}
+    ${"L"}    | ${"L"}
+    ${"LL"}   | ${"LL"}
+    ${"重さ"} | ${"判定不能"}
+  `(
+    "引数としてサイズの文字列 $size を与えて、サイズが $expected のインスタンスを生成できる。",
+    ({ size, expected }) => {
+      const ichigoSize = new IchigoSize(size);
+      expect(ichigoSize.value).toBe(expected);
+    }
+  );
 });
