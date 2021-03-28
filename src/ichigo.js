@@ -1,8 +1,9 @@
 const Ichigo = class {
   constructor(variety, size) {
-    if (!variety) {
+    const VARIETY_STRING = ["あまおう", "とちおとめ", "もういっこ"];
+    if (!VARIETY_STRING.includes(variety)) {
       throw new Error(
-        `varietyが${variety}です。いちごインスタンスを生成できません。`
+        `varietyが${variety}です。${VARIETY_STRING}以外のいちごインスタンスを生成できません。`
       );
     }
     if (!(size instanceof IchigoSize)) {
