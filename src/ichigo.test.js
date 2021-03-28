@@ -1,5 +1,3 @@
-const createIchigo = require("./ichigo").createIchigo;
-const ichigoToString = require("./ichigo").ichigoToString;
 const weightToSize = require("./ichigo").weightToSize;
 const createIchigoWithWeight = require("./ichigo").createIchigoWithWeight;
 const Ichigo = require("./ichigo").Ichigo;
@@ -15,7 +13,10 @@ describe("品種とサイズを与えて、いちごオブジェクトを作成�
   `(
     "品種として $variety とサイズとして $size を与えたときに $expected が返ること",
     ({ variety, size, expected }) => {
-      expect(createIchigo(variety, size)).toStrictEqual(expected);
+      // expect(createIchigo(variety, size)).toStrictEqual(expected);
+      const ichigo = new Ichigo(variety, size);
+      expect(ichigo.variety).toBe(variety);
+      expect(ichigo.size).toBe(size);
     }
   );
 });
@@ -30,8 +31,8 @@ describe("いちごオブジェクトの文字列表現を取得", () => {
   `(
     "`{variety: '$variety', size: '$size'}`のいちごオブジェクトを与えたときに`$expected`が返ること",
     ({ variety, size, expected }) => {
-      const ichigo = createIchigo(variety, size);
-      expect(ichigoToString(ichigo)).toBe(expected);
+      const ichigo = new Ichigo(variety, size);
+      expect(ichigo.toString()).toBe(expected);
     }
   );
 });
@@ -121,21 +122,10 @@ describe("品種と重さを与えたときにいちごオブジェクトを返�
 });
 
 describe("品種とサイズを渡していちごクラスのインスタンスが作成できること", () => {
-  test("品種として`あまおう`とサイズとして`S`を与えたときにいちごクラスのインスタンスが作成できること", () => {
-    const ichigo = new Ichigo("あまおう", "S");
-    expect(ichigo.variety).toBe("あまおう");
-    expect(ichigo.size).toBe("S");
-  });
-
   test("引数を渡さなかった場合に、例外をスローすること", () => {
     expect(() => {
       // eslint-disable-next-line no-new
       new Ichigo();
     }).toThrow();
-  });
-
-  test("いちごインスタンス`{variety:あまおう, size:S}の文字列表現を`あまおう:S`を返すこと", () => {
-    const ichigo = new Ichigo("あまおう", "S");
-    expect(ichigo.toString()).toBe("あまおう: S");
   });
 });
