@@ -1,16 +1,6 @@
 const Ichigo = class {
   constructor(variety, size) {
-    const VARIETY_STRING = ["あまおう", "とちおとめ", "もういっこ"];
-    if (!VARIETY_STRING.includes(variety)) {
-      throw new Error(
-        `varietyが${variety}です。${VARIETY_STRING}以外のいちごインスタンスを生成できません。`
-      );
-    }
-    if (!(size instanceof IchigoSize)) {
-      throw new Error(
-        `size：${size}はIchigoSizeクラスのインスタンスである必要があります。`
-      );
-    }
+    this.valid(variety, size);
     this.variety = variety;
     this.size = size;
   }
@@ -21,6 +11,20 @@ const Ichigo = class {
 
   toString() {
     return `${this.variety}: ${this.size.value}`;
+  }
+
+  valid(variety, size) {
+        const VARIETY_STRING = ["あまおう", "とちおとめ", "もういっこ"];
+    if (!VARIETY_STRING.includes(variety)) {
+      throw new Error(
+        `varietyが${variety}です。${VARIETY_STRING}以外のいちごインスタンスを生成できません。`
+      );
+    }
+    if (!(size instanceof IchigoSize)) {
+      throw new Error(
+        `size：${size}はIchigoSizeクラスのインスタンスである必要があります。`
+      );
+    }
   }
 };
 
