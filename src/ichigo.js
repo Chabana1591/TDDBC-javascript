@@ -31,6 +31,10 @@ const Ichigo = class {
     this.variety = variety;
     this.size = size;
   }
+
+  toString() {
+    return `${this.variety}: ${this.size}`;
+  }
 };
 
 module.exports = {
