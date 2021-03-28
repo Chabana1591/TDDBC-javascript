@@ -28,7 +28,7 @@ const IchigoSize = class {
   constructor(sizeStringOrWeight) {
     if (typeof sizeStringOrWeight === "string") {
       const SIZE_STRING = ["S", "M", "L", "LL"];
-      if (SIZE_STRING.indexOf(sizeStringOrWeight) >= 0) {
+      if (SIZE_STRING.includes(sizeStringOrWeight)) {
         this.value = sizeStringOrWeight;
       } else {
         this.value = "判定不能";
