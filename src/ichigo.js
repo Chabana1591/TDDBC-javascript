@@ -23,8 +23,8 @@ const createIchigoWithWeight = (variety, weight) => {
 
 const Ichigo = class {
   constructor(variety, size) {
-    if (!variety) {
-    }
+    // if (!variety) {
+    // }
     this.variety = variety;
     this.size = size;
   }
