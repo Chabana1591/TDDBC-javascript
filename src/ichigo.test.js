@@ -1,4 +1,3 @@
-const createIchigoWithWeight = require("./ichigo").createIchigoWithWeight;
 const Ichigo = require("./ichigo").Ichigo;
 const IchigoSize = require("./ichigo").IchigoSize;
 
@@ -110,22 +109,6 @@ describe("整数値で重さを与えたときに対応するいちごサイズ�
       }
     );
   });
-});
-
-describe("品種と重さを与えたときにいちごオブジェクトを返すこと", () => {
-  test.each`
-    variety         | weight | expected
-    ${"あまおう"}   | ${1}   | ${{ variety: "あまおう", size: "S" }}
-    ${"とちおとめ"} | ${10}  | ${{ variety: "とちおとめ", size: "M" }}
-    ${"もういっこ"} | ${20}  | ${{ variety: "もういっこ", size: "L" }}
-    ${"もういっこ"} | ${25}  | ${{ variety: "もういっこ", size: "LL" }}
-    ${"とちおとめ"} | ${0}   | ${{ variety: "とちおとめ", size: "判定不能" }}
-  `(
-    "品種として $variety 重さとして $weight を与えたときに $expected が返ること",
-    ({ variety, weight, expected }) => {
-      expect(createIchigoWithWeight(variety, weight)).toStrictEqual(expected);
-    }
-  );
 });
 
 describe("いちごサイズクラスのインスタンスを生成できること", () => {

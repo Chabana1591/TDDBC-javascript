@@ -1,18 +1,3 @@
-const weightToSize = weight => {
-  if (!Number.isInteger(weight)) return "判定不能";
-
-  if (25 <= weight) return "LL";
-  if (20 <= weight) return "L";
-  if (10 <= weight) return "M";
-  if (1 <= weight) return "S";
-
-  return "判定不能";
-};
-
-const createIchigoWithWeight = (variety, weight) => {
-  return { variety, size: weightToSize(weight) };
-};
-
 const Ichigo = class {
   constructor(variety, size) {
     if (!variety) {
@@ -61,8 +46,6 @@ const IchigoSize = class {
 };
 
 module.exports = {
-  weightToSize,
-  createIchigoWithWeight,
   Ichigo,
   IchigoSize,
 };
