@@ -9,13 +9,8 @@
     "quotes": "off",
     "semi": "off",
     "space-before-function-paren": "off",
-    "comma-dangle": ["error", {
-      "arrays": "never",
-      "objects": "never",
-      "imports": "never",
-      "exports": "never",
-      "functions": "never"
-    }]
+    "comma-dangle": "off",
+    "yoda":"off"
   },
   "env": {
     "jest/globals": true
